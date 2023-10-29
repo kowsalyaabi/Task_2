@@ -1,0 +1,42 @@
+body {
+    background-color: #74c69d;
+}
+.container {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: #d8f3dc;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 3px double #2d6a4f;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #b7e4c7;
+    border-radius: 5px;
+}
+.task-item.completed {
+    background-color: #52b788;
+    text-decoration: line-through;
+}
+.task-item:hover {
+    background-color: #95d5b2;
+}
+.task-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+.btn-danger {
+    background-color: #40916c;
+    border: none;
+}
+.btn-danger:hover {
+    background-color: #081c15;
+}
