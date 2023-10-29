@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>DailyDo</title>
+    <style>
+        body {
+            background-color: #74c69d;
+        }
+        .container {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 50px;
+            background-color: #d8f3dc;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 3px double #2d6a4f;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #b7e4c7;
+            border-radius: 5px;
+        }
+        .task-item.completed {
+            background-color: #52b788;
+            text-decoration: line-through;
+        }
+        .task-item:hover {
+            background-color: #95d5b2;
+        }
+        .task-item input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .btn-danger {
+            background-color: #40916c;
+            border: none;
+        }
+        .btn-danger:hover {
+            background-color: #081c15;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: white; text-align: center; margin-top:5%;">DailyDo</h1>
+    <h3 style="color:#081c15 ; text-align: center; margin-top:1%;">Manage your tasks effectively!!</h3>
+    <div class="container" style="margin-top: 3%; text-align: center;">
+        <form id="task-form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="task" placeholder="Add a new task">
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color: #40916c; border: none;">Add Task</button>
+        </form>
+        <ul class="task-list" id="task-list">
+        </ul>
+        <button id="clear-completed" class="btn btn-danger" style="margin-top: 10px; background-color: #081c15; border: none;">Clear Completed Tasks</button>
+    </div>
+
+    <script>
+        document.getElementById("task-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const taskInput = document.getElementById("task");
+            const taskText = taskInput.value.trim();
+            if (taskText) {
+                const taskList = document.getElementById("task-list");
+                const taskItem = document.createElement("li");
+                taskItem.className = "task-item";
+                taskItem.innerHTML = `
+                    <input type="checkbox">
+                    <span>${taskText}</span>
+                    <button class="btn btn-danger delete">Delete</button>
+                `;
+                taskList.appendChild(taskItem);
+                taskInput.value = "";
+            }
+        });
+
+        document.getElementById("task-list").addEventListener("click", function (e) {
+            if (e.target.classList.contains("delete")) {
+                e.target.parentElement.remove();
+            } else if (e.target.type === "checkbox") {
+                e.target.parentElement.classList.toggle("completed");
+            }
+        });
+
+        document.getElementById("clear-completed").addEventListener("click", function () {
+            const completedItems = document.querySelectorAll(".task-item.completed");
+            completedItems.forEach(function (item) {
+                item.remove();
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
